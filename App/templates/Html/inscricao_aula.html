@@ -1,75 +1,40 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aulas Disponíveis</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <div>
-        <div>
-            <h2>Aulas Disponíveis</h2>
-            <a href="{% url 'aulas_inscritas' %}" >Aulas Inscritas</a>
-        </div>
+{% block title %}Aulas Disponíveis{% endblock %}
 
-        
+{% block content %}
+<h2 class="titulo-pagina">Inscrição de Aulas</h2>
 
-        <div>
-            {% for aula in aulas %}
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <span>{{ aula.materia }}</span>
-                                <small>{{ aula.data|date:"d/m/Y" }} às {{ aula.horario|time:"H:i" }}</small>
-                            </div>
-                            
-                            <p>
-                                {{ aula.conteúdo }}
-                            </p>
+<div class="painel">
+    <div class="titulo-painel">Aulas Disponíveis</div>
 
-                            <div>
-                                <div>
-                                    <small>Vagas disponíveis:</small>
-                                    <span class="fw-bold fs-5 {% if aula.vagas == 0 %}text-danger{% else %}text-success{% endif %}">
-                                        {{ aula.vagas }}
-                                    </span>
-                                </div>
-
-                                <form method="POST" action="{% url 'inscrever_aula' aula.id %}">
-                                    {% csrf_token %}
-                                    
-                                    {% if aula.id in aulas_inscritas %}
-                                        <span>Inscrito :(</span>
-                                    {% elif aula.vagas > 0 %}
-                                        <button type="submit">Garantir Vaga</button>
-                                    {% else %}
-                                        <span>Esgotado</span>
-                                    {% endif %}
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+    <div class="lista-itens">
+        {% for aula in aulas %}
+            <div class="item-linha">
+                <div class="info-texto">
+                    <h4>{{ aula.materia }}</h4>
+                    <p>{{ aula.conteúdo }} • 📅 {{ aula.data|date:"d/m/Y" }} às {{ aula.horario|time:"H:i" }}</p>
+                    <small style="color: {% if aula.vagas == 0 %}var(--vermelho){% else %}var(--verde-sucesso){% endif %}; font-weight: bold;">
+                        Vagas disponíveis: {{ aula.vagas }}
+                    </small>
                 </div>
-            {% empty %}
-                <div>
-                    <div>
-                        Nenhuma aula cadastrada no momento.
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+
+                <form method="POST" action="{% url 'inscrever_aula' aula.id %}">
+                    {% csrf_token %}
+                    {% if aula.id in aulas_inscritas %}
+                        <span class="botao desativado">Inscrito</span>
+                    {% elif aula.vagas > 0 %}
+                        <button type="submit" class="botao">Inscrever-se</button>
+                    {% else %}
+                        <span class="botao desativado">Sem Vagas</span>
+                    {% endif %}
+                </form>
+            </div>
+        {% empty %}
+            <div class="caixa-vazia">
+                <p>Nenhuma aula cadastrada no momento.</p>
+            </div>
+        {% endfor %}
     </div>
-
-    
-    <script>
-        function esconderBotao(form) {
-            const btn = form.querySelector('.meu-botao');
-            if (btn) {
-                btn.style.display = 'none';
-            }
-        }
-    </script>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,66 +1,35 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Aulas Inscritas</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <div>
-        <div>
-            <div>
-                <h2>Minhas Inscrições</h2>
-                <p>Aulas que você garantiu sua vaga</p>
-            </div>
-            <div>
-                <a href="{% url 'listar_aulas' %}">Ver Todas as Aulas</a>
-            </div>
-        </div>
+{% block title %}Minhas Inscrições{% endblock %}
 
-        <div>
-            {% for aula in aulas %}
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <span>{{ aula.materia }}</span>
-                                <span>Inscrito</span>
-                            </div>
-                            
-                            <h6>
-                                {{ aula.data|date:"d/m/Y" }} às {{ aula.horario|time:"H:i" }}
-                            </h6>
+{% block content %}
+<h2 class="titulo-pagina">Minhas Aulas</h2>
 
-                            <p>
-                                {{ aula.conteúdo }}
-                            </p>
+<div class="painel">
+    <div class="titulo-painel">Aulas que você garantiu sua vaga</div>
 
-                            <div>
-                                <small>ID da Aula: #{{ aula.id }}</small>
-
-                                <form method="POST" action="{% url 'cancelar_inscricao' aula.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" onclick="return confirm('Deseja cancelar sua vaga nesta aula?');">
-                                        Cancelar Inscrição
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+    <div class="lista-itens">
+        {% for aula in aulas %}
+            <div class="item-linha">
+                <div class="info-texto">
+                    <h4>{{ aula.materia }}</h4>
+                    <p>{{ aula.conteúdo }} • 📅 {{ aula.data|date:"d/m/Y" }} às {{ aula.horario|time:"H:i" }}</p>
                 </div>
-            {% empty %}
-                <div>
-                    <div>
-                        <h4>Você ainda não se inscreveu em nenhuma aula!</h4>
-                        <div>
-                            <a href="{% url 'listar_aulas' %}">Navegar pelas aulas disponíveis</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+
+                <form method="POST" action="{% url 'cancelar_inscricao' aula.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="botao cancelar" onclick="return confirm('Deseja cancelar sua vaga nesta aula?');">
+                        Cancelar Inscrição
+                    </button>
+                </form>
+            </div>
+        {% empty %}
+            <div class="caixa-vazia">
+                <p>Você ainda não se inscreveu em nenhuma aula!</p>
+                <br>
+                <a href="{% url 'listar_aulas' %}" class="botao" style="display: inline-block;">Navegar pelas aulas</a>
+            </div>
+        {% endfor %}
     </div>
-
-</body>
-</html>
+</div>
+{% endblock %}

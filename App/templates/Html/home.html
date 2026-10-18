@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends 'base.html' %}
 
-    <body>
-        <a href = "{% url 'cadastrar_aula' %}">
-            <button>Cadastro de Aulas</button>
-    
-        <a href = "{% url 'listar_aulas' %}">
-            <button>Inscrição em Aulas</button>
-    </body>
-</html>
+{% block title %}Home | UniLink{% endblock %}
+
+{% block content %}
+<h2 class="titulo-pagina">Bem-vindo ao Portal UniLink</h2>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 700px; margin: 0 auto;">
+    <div class="painel" style="text-align: center; margin-bottom: 0;">
+        <div class="titulo-painel">Área do Professor</div>
+        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-bottom: 20px;">Cadastre e organize novas aulas para os alunos.</p>
+        <a href="{% url 'cadastrar_aula' %}" class="botao" style="width: 100%;">Cadastro de Aulas</a>
+    </div>
+
+    <div class="painel" style="text-align: center; margin-bottom: 0;">
+        <div class="titulo-painel">Área do Aluno</div>
+        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-bottom: 20px;">Navegue pelas aulas e garanta sua inscrição.</p>
+        <a href="{% url 'listar_aulas' %}" class="botao" style="width: 100%;">Inscrição em Aulas</a>
+    </div>
+</div>
+{% endblock %}
