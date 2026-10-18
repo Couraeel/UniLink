@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aulas Disponíveis</title>
+</head>
+<body>
+
+    <div>
+        <div>
+            <h2>Aulas Disponíveis</h2>
+            <a href="{% url 'cadastrar_aula' %}" >+ Cadastrar Nova Aula</a>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button"  data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div>
+            {% for aula in aulas %}
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <span>{{ aula.materia }}</span>
+                                <small>{{ aula.data|date:"d/m/Y" }} às {{ aula.horario|time:"H:i" }}</small>
+                            </div>
+                            
+                            <p>
+                                {{ aula.conteúdo }}
+                            </p>
+
+                            <div>
+                                <div>
+                                    <small>Vagas disponíveis:</small>
+                                    <span class="fw-bold fs-5 {% if aula.vagas == 0 %}text-danger{% else %}text-success{% endif %}">
+                                        {{ aula.vagas }}
+                                    </span>
+                                </div>
+
+                                <form method="POST" action="{% url 'inscrever_aula' aula.id %}">
+                                    {% csrf_token %}
+                                    
+                                    {% if aula.id in aulas_inscritas %}
+                                        <span>Inscrito :(</span>
+                                    {% elif aula.vagas > 0 %}
+                                        <button type="submit">Garantir Vaga</button>
+                                    {% else %}
+                                        <span>Esgotado</span>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div>
+                    <div>
+                        Nenhuma aula cadastrada no momento.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+    <script>
+        function esconderBotao(form) {
+            const btn = form.querySelector('.meu-botao');
+            if (btn) {
+                btn.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
