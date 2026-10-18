@@ -1,0 +1,357 @@
+/* 
+========================================== 
+========================================== 
+*/
+
+/* CONFIGS GLOBAIS E CORES PREDEFINIDAS */
+:root {
+    --cor-principal: #1d9130;
+    --cor-principal-escura: #146b22;
+    --cor-fundo: #ebf0e9;
+    --cor-card: #194d24; 
+    --cor-item: #ecefe9;
+    --texto-principal: #1f2937;
+    --texto-secundario: #6b7280;
+    --vermelho: #dc2626;
+    --verde-sucesso: #16a34a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--texto-principal);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* HEADER */
+
+header {
+    background-color: var(--cor-principal);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.menu-topo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.perfil-usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 16px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: white;
+    color: var(--cor-principal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.links-menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.links-menu a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.links-menu a:hover {
+    color: white;
+}
+
+.logo-texto {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* PRINCIPAL E TITULO */
+
+main {
+    flex: 1;
+    max-width: 950px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.titulo-pagina {
+    text-align: center;
+    color: var(--cor-principal);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* PAINÉIS PRINCIPAIS */
+   
+.painel {
+    background-color: var(--cor-card);
+    border-radius: 10px;
+    padding: 35px 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.titulo-painel {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* LISTAS */
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.lista-itens::-webkit-scrollbar {
+    width: 6px;
+}
+.lista-itens::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.item-linha {
+    background-color: var(--cor-item);
+    border-radius: 10px;
+    padding: 16px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease;
+}
+
+.item-linha:hover {
+    transform: translateY(-2px);
+}
+
+.info-texto h4 {
+    color: var(--texto-principal);
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.info-texto p {
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* BOTOES */
+
+.botao {
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+.botao:hover {
+    background-color: var(--cor-principal-escura);
+}
+
+.botao.cancelar {
+    background-color: var(--vermelho);
+}
+.botao.cancelar:hover {
+    background-color: #b91c1c;
+}
+
+.botao.desativado {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* FORMULARIOS */
+
+.bloco-input {
+    background-color: var(--cor-item);
+    border-radius: 10px;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.bloco-input:focus-within {
+    border-color: var(--cor-principal);
+    background-color: white;
+}
+
+.bloco-input label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--cor-principal-escura);
+    margin-bottom: 2px;
+}
+
+.bloco-input input,
+.bloco-input textarea,
+.bloco-input select {
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    color: var(--texto-principal);
+    outline: none;
+    width: 100%;
+}
+
+.bloco-input textarea {
+    resize: none;
+    height: 40px;
+}
+
+.linha-dupla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* caixa vazia quando não tem itens ou sucesso de açao*/
+
+.caixa-vazia {
+    text-align: center;
+    padding: 30px;
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* RODAPÉ */
+
+footer {
+    background-color: var(--cor-principal);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 15px 0;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+/* 
+========================================== 
+========================================== 
+*/
+
+/* RESPONSIVIDADE PARA CELULAR */
+
+@media (max-width: 768px) {
+    .menu-topo {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .menu-esquerda {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .linha-dupla {
+        grid-template-columns: 1fr;
+    }
+    .item-linha {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .item-linha button, .item-linha a {
+        width: 100%;
+    }
+}

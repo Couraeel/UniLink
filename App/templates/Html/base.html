@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}UniLink - Portal de Aulas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <nav class="menu-topo">
+            <div class="menu-esquerda">
+                <div class="perfil-usuario">
+                    <div class="avatar">
+                        {{ user.first_name|default:"U"|slice:":1" }}
+                    </div>
+                    <span>{{ user.get_full_name|default:"Usuário" }}</span>
+                </div>
+
+                <ul class="links-menu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'listar_aulas' %}">Aulas Disponíveis</a></li>
+                    <li><a href="{% url 'aulas_inscritas' %}">Minhas Inscrições</a></li>
+                </ul>
+            </div>
+
+            <div class="logo-texto">
+                UniLink
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Todos os direitos reservados – UniLink</p>
+    </footer>
+
+</body>
+</html>
