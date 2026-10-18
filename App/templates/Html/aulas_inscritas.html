@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Aulas Inscritas</title>
+</head>
+<body>
+
+    <div>
+        <div>
+            <div>
+                <h2>Minhas Inscrições</h2>
+                <p>Aulas que você garantiu sua vaga</p>
+            </div>
+            <div>
+                <a href="{% url 'listar_aulas' %}">Ver Todas as Aulas</a>
+            </div>
+        </div>
+
+        <div>
+            {% for aula in aulas %}
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <span>{{ aula.materia }}</span>
+                                <span>Inscrito</span>
+                            </div>
+                            
+                            <h6>
+                                {{ aula.data|date:"d/m/Y" }} às {{ aula.horario|time:"H:i" }}
+                            </h6>
+
+                            <p>
+                                {{ aula.conteúdo }}
+                            </p>
+
+                            <div>
+                                <small>ID da Aula: #{{ aula.id }}</small>
+
+                                <form method="POST" action="{% url 'cancelar_inscricao' aula.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('Deseja cancelar sua vaga nesta aula?');">
+                                        Cancelar Inscrição
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div>
+                    <div>
+                        <h4>Você ainda não se inscreveu em nenhuma aula!</h4>
+                        <div>
+                            <a href="{% url 'listar_aulas' %}">Navegar pelas aulas disponíveis</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

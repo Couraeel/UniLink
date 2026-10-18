@@ -23,4 +23,6 @@ urlpatterns = [
     path('cadastrar/', views.cadastrar_aula, name='cadastrar_aula'),
     path('listar/', views.listar_aulas, name='listar_aulas'),
     path('inscrever/<int:aula_id>/', views.inscrever_aula, name='inscrever_aula'),
+    path('inscritas/', views.aulas_inscritas, name='aulas_inscritas'),
+    path('cancelar/<int:aula_id>/', views.cancelar_inscricao, name='cancelar_inscricao'),
 ]
