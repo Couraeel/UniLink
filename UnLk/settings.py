@@ -55,7 +55,7 @@ ROOT_URLCONF = 'UnLk.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'App' / 'templates' / 'Html'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
